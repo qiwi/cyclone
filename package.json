@@ -1,0 +1,106 @@
+{
+  "name": "@qiwi/cyclone",
+  "version": "0.0.1",
+  "description": "\"State machine\" for basic data flows",
+  "main": "dist/index.js",
+  "scripts": {
+    "jest": "jest -w 2",
+    "lint": "standard-flow src/**/*.js",
+    "flow": "flow",
+    "test": "npm run lint && npm run flow && npm run build && npm run jest",
+    "flow_coverage": "flow-coverage-report -i 'src/main/**/*.js' -t html -t json -t text --threshold 90",
+    "build": "BABEL_ENV=production babel src/main --out-dir dist",
+    "test_with_report": "npm test && npm run codeclimate_push && npm run coveralls_push",
+    "codeclimate_push": "codeclimate-test-reporter < ./coverage/lcov.info",
+    "coveralls_push": "cat ./coverage/lcov.info | coveralls",
+    "doc": "documentation build src/** -f html -o docs",
+    "docs": "npm run doc"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qiwi/common-formatters.git"
+  },
+  "keywords": [
+    "format",
+    "common formatters"
+  ],
+  "author": "Anton Golub <a.golub@qiwi.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.0",
+    "@semantic-release/git": "^7.0.4",
+    "@semantic-release/github": "^5.0.5",
+    "@semantic-release/npm": "^5.0.4",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-minify": "^0.4.3",
+    "babel-register": "^6.26.0",
+    "codeclimate-test-reporter": "^0.5.0",
+    "coveralls": "^3.0.2",
+    "documentation": "^8.1.2",
+    "flow-bin": "^0.81.0",
+    "flow-coverage-report": "^0.6.0",
+    "flow-remove-types": "^1.2.3",
+    "jest": "^23.6.0",
+    "semantic-release": "^15.9.15",
+    "standard-flow": "^1.0.0"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/main/interface.js"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/src/main/**/*.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/test/**/*.js"
+    ]
+  },
+  "standard-flow": {
+    "parser": "babel-eslint",
+    "globals": [
+      "it",
+      "expect",
+      "describe"
+    ],
+    "ignore": [],
+    "plugins": [
+      "flowtype"
+    ],
+    "settings": {
+      "flowtype": {
+        "onlyFilesWithFlowAnnotation": true
+      }
+    }
+  },
+  "release": {
+    "branch": "master",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
+  }
+}

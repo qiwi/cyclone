@@ -1,0 +1,12 @@
+[include]
+./src/
+
+[ignore]
+/dist/
+.*/node_modules/.*/
+
+[libs]
+./definitions/
+
+[options]
+esproposal.class_static_fields=enable
