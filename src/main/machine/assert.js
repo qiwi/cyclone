@@ -3,13 +3,14 @@
 import type {
   IState,
   IStatus,
-  IMachineType
+  IMachineType,
+  ITransitions
 } from '../interface'
 
 import {
   MachineError,
   MACHINE_TYPE_MISMATCH,
-  STATE_SEQUENCE_VIOLATION
+  TRANSITION_VIOLATION
 } from '../error'
 
 export const assertType = (type: IMachineType, state: IState): void => {
@@ -18,8 +19,16 @@ export const assertType = (type: IMachineType, state: IState): void => {
   }
 }
 
-export const assertStatus = (type: IMachineType, state: IState, ...status: IStatus[]) => {
+export const assertTransition = (type: IMachineType, state: IState, ...status: IStatus[]) => {
   if (!status.includes(state.status)) {
-    throw new MachineError(STATE_SEQUENCE_VIOLATION)
+    throw new MachineError(TRANSITION_VIOLATION)
   }
+}
+
+export const assertTransitionsMap = (transitions: ITransitions, finite: boolean): boolean => {
+
+}
+
+export const assertThread = () => {
+
 }

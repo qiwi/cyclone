@@ -1,7 +1,8 @@
 // @flow
 
 export const MACHINE_TYPE_MISMATCH = 'Machine type mismatch'
-export const STATE_SEQUENCE_VIOLATION = 'State sequence violation'
+export const TRANSITION_VIOLATION = 'Transition violation'
+export const INVALID_TRANSITION_DECLARATION = 'Invalid transition declaration'
 
 export class MachineError extends Error {}
 
