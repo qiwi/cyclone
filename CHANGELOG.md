@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/qiwi/cyclone/compare/v1.0.0...v1.1.0) (2018-10-04)
+
+
+### Features
+
+* add `historySize` limit ([b4565e7](https://github.com/qiwi/cyclone/commit/b4565e7))
+
 # 1.0.0 (2018-10-04)
 
 
