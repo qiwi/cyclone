@@ -73,8 +73,12 @@
     "parser": "babel-eslint",
     "globals": [
       "it",
+      "fit",
+      "xit",
       "expect",
-      "describe"
+      "describe",
+      "fdescribe",
+      "xdescribe"
     ],
     "ignore": [],
     "plugins": [
