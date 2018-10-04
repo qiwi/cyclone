@@ -82,7 +82,11 @@
       "expect",
       "describe",
       "fdescribe",
-      "xdescribe"
+      "xdescribe",
+      "afterEach",
+      "afterAll",
+      "beforeEach",
+      "beforeAll"
     ],
     "ignore": [],
     "plugins": [

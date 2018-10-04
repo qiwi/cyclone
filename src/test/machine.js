@@ -1,15 +1,117 @@
 import Machine, {DEFAULT_HANDLER} from '../main/machine'
+import {LOCK_VIOLATION, TRANSITION_VIOLATION, INVALID_UNLOCK_KEY} from '../main/error'
 
 describe('machine', () => {
-  describe('constructor', () => {})
-  describe('prototype', () => {})
+  describe('constructor', () => {
+    it('returns proper instance', () => {
+      const opts = {
+        transitions: {
+          'foo>bar': true
+        }
+      }
+      const machine = new Machine(opts)
+
+      expect(machine).toBeInstanceOf(Machine)
+      expect(machine.opts).toEqual(opts)
+      expect(machine.transitions).toBe(opts.transitions)
+    })
+  })
+
+  describe('prototype', () => {
+    const handler = (state, ...args) => args.reduce((memo, value) => ({...memo, ...value}))
+    const opts = {
+      initialData: {},
+      initialState: 'foo',
+      transitions: {
+        'foo>bar': handler
+      }
+    }
+    const machine = new Machine(opts)
+
+    afterEach(() => {
+      machine.key = null
+    })
+
+    describe('#current', () => {
+      it('returns actual machine digest', () => {
+        expect(machine.current()).toEqual({
+          state: 'foo',
+          data: {}
+        })
+      })
+    })
+
+    describe('#next', () => {
+      it('proceeds to ne next step if transition exists', () => {
+        expect(machine.next('bar', {a: 'A'}, {b: 'B'})).toBe(machine)
+        expect(machine.current()).toEqual({
+          state: 'bar',
+          data: {a: 'A', b: 'B'}
+        })
+      })
+
+      it('throws transition error', () => {
+        expect(() => machine.next('qux')).toThrow(TRANSITION_VIOLATION)
+      })
+
+      it('asserts lock status', () => {
+        machine.lock()
+        expect(() => machine.next('qux')).toThrow(LOCK_VIOLATION)
+      })
+    })
+
+    describe('#prev', () => {
+      it('rollbacks to prev state if exists', () => {
+        expect(machine.prev()).toBe(machine)
+        expect(machine.current()).toEqual({
+          state: 'foo',
+          data: {}
+        })
+      })
+
+      it('throws transition error otherwise', () => {
+        expect(() => machine.prev()).toThrow(TRANSITION_VIOLATION)
+      })
+
+      it('asserts lock status', () => {
+        machine.lock()
+        expect(() => machine.prev('qux')).toThrow(LOCK_VIOLATION)
+      })
+    })
+
+    describe('#lock', () => {
+      it('uses passed string as lock key', () => {
+        expect(machine.lock('foo')).toBe(machine)
+        expect(machine.key).toBe('foo')
+      })
+
+      it('generates new key otherwise', () => {
+        expect(machine.lock()).toBe(machine)
+        expect(machine.key).toMatch(/^lock\d\.\d+/)
+      })
+    })
+
+    describe('#unlock', () => {
+      it('unlockes the machine with key', () => {
+        machine.lock('foo')
+        expect(machine.unlock('foo')).toBe(machine)
+        expect(machine.key).toBeNull()
+      })
+
+      it('throws error if key is invalid', () => {
+        machine.lock('foo')
+        expect(() => machine.unlock('bar')).toThrow(INVALID_UNLOCK_KEY)
+      })
+    })
+  })
+
   describe('static', () => {
     describe('#getTargetTransition', () => {
       it('return next transition related to history', () => {
         const history = [
           {state: 'foo', data: null},
           {state: 'bar', data: null},
-          {state: 'baz', data: null},
+          {state: 'baz', data: null}
         ]
         const next = 'qux'
         expect(Machine.getTargetTransition(next, history)).toBe('foo>bar>baz>qux')
