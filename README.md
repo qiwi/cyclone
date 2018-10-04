@@ -1,9 +1,9 @@
 # @qiwi/cyclone
 
-"State machine" for basic data flows.
+"State machine" for basic purposes.
 
 #### Motivation
-There're several redux-state-machine implementations. The best of them (IMHO): krasimir/stent. 
+There're many [redux-state-machine](https://www.google.com/search?q=redux+state+machine) implementations. The best of them (IMHO): [krasimir/stent](https://github.com/krasimir/stent). 
 
 * `Stent` does not allow to "lock" the execution thread. Therefore impossible to verify that `next` step strictly follows (corresponds) by the `prev`.
 * Has no standard mechanics for state rollback.
