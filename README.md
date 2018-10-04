@@ -29,7 +29,8 @@ If these points are not significant for you, `Stent` might be your best choice.
         'bar>baz': handler1,
         'baz>foo': handler2,
         'foo>bar>baz>foo': handler1
-      }
+      },
+      historySize: 5,     // default = 10
     }
     const machine = new Machine(opts)
 ```

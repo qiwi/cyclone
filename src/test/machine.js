@@ -5,6 +5,7 @@ describe('machine', () => {
   describe('constructor', () => {
     it('returns proper instance', () => {
       const opts = {
+        historySize: 5,
         transitions: {
           'foo>bar': true
         }
@@ -57,6 +58,25 @@ describe('machine', () => {
       it('asserts lock status', () => {
         machine.lock()
         expect(() => machine.next('qux')).toThrow(LOCK_VIOLATION)
+      })
+
+      it('clears state history to the limit', () => {
+        const machine = new Machine({
+          historySize: 3,
+          transitions: {
+            'foo>bar': true,
+            'bar>baz': true,
+            'baz>foo': true
+          },
+          initialState: 'foo'
+        })
+        expect(machine.history).toEqual([{state: 'foo'}])
+        machine.next('bar')
+        machine.next('baz')
+        expect(machine.history).toEqual([{state: 'foo'}, {state: 'bar'}, {state: 'baz'}])
+        machine.next('foo')
+        machine.next('bar')
+        expect(machine.history).toEqual([{state: 'baz'}, {state: 'foo'}, {state: 'bar'}])
       })
     })
 

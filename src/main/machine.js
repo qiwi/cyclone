@@ -20,9 +20,14 @@ import type {
   ITransitions
 } from './interface'
 
+import log from './log'
+
 export const DELIMITER = '>'
 export const DEFAULT_HANDLER: IHandler = data => data // echo
-export const DEFAULT_OPTS: IMachineOpts = {transitions: {}}
+export const DEFAULT_OPTS: IMachineOpts = {
+  transitions: {},
+  historySize: 10
+}
 
 export default class Machine implements IMachine {
   opts: IMachineOpts
@@ -58,6 +63,11 @@ export default class Machine implements IMachine {
       state,
       data
     })
+
+    if (this.history.length > +this.opts.historySize) {
+      log.debug('history limit reached')
+      this.history.shift()
+    }
 
     return this
   }

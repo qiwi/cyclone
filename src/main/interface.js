@@ -18,6 +18,7 @@ export type IMachineOpts = {
   initialState?: ?IState,
   initialData?: ?IAny,
   immutable?: boolean,
+  historySize?: number,
 }
 
 export type ITransitions = {
