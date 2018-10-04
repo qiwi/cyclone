@@ -35,7 +35,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.4",
-    "@semantic-release/github": "^5.0.5",
+    "@semantic-release/github": "^5.0.6",
     "@semantic-release/npm": "^5.0.4",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -45,16 +45,16 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-flow": "^6.23.0",
-    "babel-preset-minify": "^0.4.3",
+    "babel-preset-minify": "^0.5.0",
     "babel-register": "^6.26.0",
     "codeclimate-test-reporter": "^0.5.0",
     "coveralls": "^3.0.2",
     "documentation": "^8.1.2",
-    "flow-bin": "^0.81.0",
+    "flow-bin": "^0.82.0",
     "flow-coverage-report": "^0.6.0",
     "flow-remove-types": "^1.2.3",
     "jest": "^23.6.0",
-    "semantic-release": "^15.9.15",
+    "semantic-release": "^15.9.17",
     "standard-flow": "^1.0.0"
   },
   "jest": {
