@@ -2,9 +2,11 @@
 
 export type IAny = any
 
+export type IKey = string | null
+
 export type IState = string
 
-export type IHandler = (data: IAny, ...payload?: ?IAny) => ?IAny
+export type IHandler = (data: IAny, ...payload?: Array<?IAny>) => ?IAny
 
 export type IMachineOpts = {
   transitions: ITransitions,
@@ -24,15 +26,16 @@ export type IHistoryItem = {
 export type IHistory = IHistoryItem[]
 
 export interface IMachine {
-  next(status: IStatus): IMachine,
-  prev(status: IStatus): IMachine,
-  lock(key: string): IMachine,
-  unlock(key: string): IMachine,
+  constructor(opts: IMachineOpts): IMachine,
+  next(state: IState): IMachine,
+  prev(state?: IState): IMachine,
+  lock(key?: IKey): IMachine,
+  unlock(key: IKey): IMachine,
 
   transitions: ITransitions,
-  state: IState,
-  data: IAny,
+  state: ?IState,
+  data: ?IAny,
   history: IHistory,
   opts: IMachineOpts,
-  key: string | null,
+  key: IKey,
 }

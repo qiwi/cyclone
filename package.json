@@ -67,6 +67,10 @@
     ],
     "testMatch": [
       "<rootDir>/src/test/**/*.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/src/test/stub"
     ]
   },
   "standard-flow": {
