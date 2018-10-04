@@ -11,7 +11,7 @@ import type {
 } from './interface'
 
 export const DELIMITER = '>'
-export const DEFAULT_HANDLER = data => data // echo
+export const DEFAULT_HANDLER: IHandler = data => data // echo
 export const DEFAULT_OPTS = {}
 
 export default class Machine implements IMachine {
@@ -28,8 +28,10 @@ export default class Machine implements IMachine {
       throw new MachineError(TRANSITION_VIOLATION)
     }
 
-    return typeof nextTransition === 'function'
-      ? nextTransition
+    const handler = transitions[nextTransition]
+
+    return typeof handler === 'function'
+      ? handler
       : DEFAULT_HANDLER
   }
 

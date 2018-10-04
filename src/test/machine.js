@@ -1,4 +1,4 @@
-import Machine from '../../src/main/machine'
+import Machine, {DEFAULT_HANDLER} from '../main/machine'
 
 describe('machine', () => {
   describe('constructor', () => {})
@@ -33,28 +33,33 @@ describe('machine', () => {
       })
     })
 
-    xdescribe('#getHandler', () => {
+    describe('#getHandler', () => {
+      const handler = () => {}
       const transitions = {
-        'foo>bar>baz': true,
-        'foo>foo>bar>baz': true,
-        'foo>baz': true
+        'foo>bar>baz': handler,
+        'foo>foo>bar>baz': true
       }
 
-      it('finds the best match', () => {
-        const history1 = [
+      it('returns custom handler if found', () => {
+        const history = [
           {state: 'foo', data: null},
           {state: 'bar', data: null}
         ]
-        const history2 = [
-          {state: 'foo', data: null},
-          {state: 'foo', data: null},
-          {state: 'bar', data: null}
-        ]
-        expect(Machine.getHandler('baz', history1, transitions)).toBe('foo>bar>baz')
-        expect(Machine.getHandler('baz', history2, transitions)).toBe('foo>foo>bar>baz')
+        expect(Machine.getHandler('baz', history, transitions)).toBe(handler)
       })
 
-      it('returns undefined if no match found', () => {})
+      it('returns default handler otherwise', () => {
+        const history = [
+          {state: 'foo', data: null},
+          {state: 'foo', data: null},
+          {state: 'bar', data: null}
+        ]
+        expect(Machine.getHandler('baz', history, transitions)).toBe(DEFAULT_HANDLER)
+      })
+
+      it('throws Error if no match found', () => {
+        expect(() => Machine.getHandler('qux', [], transitions)).toThrowError()
+      })
     })
   })
 })
