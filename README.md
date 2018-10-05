@@ -11,7 +11,7 @@
 "State machine" for basic purposes.
 
 #### Motivation
-There're many [redux-state-machine](https://www.google.com/search?q=redux+state+machine) implementations. The best of them (IMHO): [krasimir/stent](https://github.com/krasimir/stent). 
+There're many [redux-state-machine](https://www.google.com/search?q=redux+state+machine) implementations. [krasimir/stent](https://github.com/krasimir/stent) is pretty good among others (just opinion). But:
 
 * `Stent` does not allow to "lock" the execution thread. Therefore impossible to verify that `next` step strictly follows (corresponds) by the `prev`.
 * Has no standard mechanics for state rollback.
@@ -20,7 +20,7 @@ If these points are not significant for you, `Stent` might be your best choice.
 
 #### Features
 * History-like api
-* Machine lock mechanics
+* Lock mechanics
 * Multi-step transition declarations
 
 #### API
