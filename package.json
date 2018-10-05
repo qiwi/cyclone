@@ -1,7 +1,7 @@
 {
   "name": "@qiwi/cyclone",
   "version": "1.1.0",
-  "description": "\"State machine\" for basic data flows",
+  "description": "\"State machine\" for basic purposes",
   "main": "dist/index.js",
   "scripts": {
     "jest": "jest -w 2",
@@ -25,8 +25,11 @@
     "url": "https://github.com/qiwi/cyclone.git"
   },
   "keywords": [
-    "format",
-    "common formatters"
+    "state machine",
+    "finite-state machine",
+    "FSM",
+    "FSA",
+    "automata"
   ],
   "author": "Anton Golub <a.golub@qiwi.com>",
   "license": "MIT",
