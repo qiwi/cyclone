@@ -1,5 +1,7 @@
 # @qiwi/cyclone
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/qiwi/cyclone.svg)](https://greenkeeper.io/)
+
 "State machine" for basic purposes.
 
 #### Motivation
