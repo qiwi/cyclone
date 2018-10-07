@@ -7,6 +7,11 @@ import {
   INVALID_UNLOCK_KEY
 } from './error'
 
+import {
+  generateDate,
+  generateId
+} from './generator'
+
 import type {
   IAny,
   IDigest,
@@ -44,7 +49,9 @@ export default class Machine implements IMachine {
     if (typeof opts.initialState === 'string') {
       this.history.push({
         state: opts.initialState,
-        data: opts.initialData
+        data: opts.initialData,
+        id: generateId(),
+        date: generateDate()
       })
     }
 
@@ -59,9 +66,14 @@ export default class Machine implements IMachine {
     const handler = this.constructor.getHandler(state, this.history, this.transitions)
     const current = this.current()
     const data = handler(current.data, ...payload)
+    const id = generateId()
+    const date = generateDate()
+
     this.history.push({
       state,
-      data
+      data,
+      id,
+      date
     })
 
     if (this.history.length > +this.opts.historySize) {

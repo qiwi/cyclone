@@ -35,7 +35,7 @@ describe('machine', () => {
 
     describe('#current', () => {
       it('returns actual machine digest', () => {
-        expect(machine.current()).toEqual({
+        expect(machine.current()).toMatchObject({
           state: 'foo',
           data: {}
         })
@@ -45,9 +45,11 @@ describe('machine', () => {
     describe('#next', () => {
       it('proceeds to ne next step if transition exists', () => {
         expect(machine.next('bar', {a: 'A'}, {b: 'B'})).toBe(machine)
-        expect(machine.current()).toEqual({
+        expect(machine.current()).toMatchObject({
           state: 'bar',
-          data: {a: 'A', b: 'B'}
+          data: {a: 'A', b: 'B'},
+          date: expect.any(Date),
+          id: expect.stringMatching(/^\d\.\d+$/)
         })
       })
 
@@ -70,22 +72,24 @@ describe('machine', () => {
           },
           initialState: 'foo'
         })
-        expect(machine.history).toEqual([{state: 'foo'}])
+        expect(machine.history).toMatchObject([{state: 'foo'}])
         machine.next('bar')
         machine.next('baz')
-        expect(machine.history).toEqual([{state: 'foo'}, {state: 'bar'}, {state: 'baz'}])
+        expect(machine.history).toMatchObject([{state: 'foo'}, {state: 'bar'}, {state: 'baz'}])
         machine.next('foo')
         machine.next('bar')
-        expect(machine.history).toEqual([{state: 'baz'}, {state: 'foo'}, {state: 'bar'}])
+        expect(machine.history).toMatchObject([{state: 'baz'}, {state: 'foo'}, {state: 'bar'}])
       })
     })
 
     describe('#prev', () => {
       it('rollbacks to prev state if exists', () => {
         expect(machine.prev()).toBe(machine)
-        expect(machine.current()).toEqual({
+        expect(machine.current()).toMatchObject({
           state: 'foo',
-          data: {}
+          data: {},
+          date: expect.any(Date),
+          id: expect.stringMatching(/^\d\.\d+$/)
         })
       })
 

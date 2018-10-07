@@ -28,6 +28,8 @@ export type ITransitions = {
 export type IHistoryItem = {
   state: ?IState,
   data: ?IAny,
+  id: string,
+  date: number
 }
 export type IHistory = IHistoryItem[]
 
