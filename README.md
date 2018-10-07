@@ -46,22 +46,22 @@ If these points are not significant for you, `Stent` might be your best choice.
 ##### `current`
 Returns machine state digest:
 ```javascript
-    machine.current()   // {state: 'foo', data: {a: 'AAA'}}
+    machine.current()   // {state: 'foo', data: {a: 'AAA'}, id: '0.2234...', date: 2018-10-07T16:59:23.644Z}
 ```
 
 ##### `next`
 Transits the machine to a new state:
 ```javascript
     machine.next('bar', {optional: 'args'}, 'for', 'handler')
-    machine.current()   // {state: 'bar', data: {...}}
+    machine.current()   // {state: 'bar', data: {...}, ...}
 ```
 
 ##### `prev`
 Reverts the last transition:
 ```javascript
-    machine.current()   // {state: 'bar', data: {...}}
+    machine.current()   // {state: 'bar', data: {...}, ...}
     machine.prev()      // btw, it returns machine ref
-    machine.current()   // {state: 'foo', data: {...}}
+    machine.current()   // {state: 'foo', data: {...}, ...}
 ```
 
 ##### `lock` / `unlock`
@@ -72,3 +72,38 @@ Prevents state update.
     machine.unlock('invalidKey')    // MachineError: Invalid unlock key
     machine.unlock('key')
 ``` 
+
+#### Usage examples
+Imagine, [Rematch](https://github.com/rematch/rematch) model:
+```javascript
+    import txn from '../../../../api/txn'
+    import Machine from '@qiwi/cyclone'
+    
+    const machine = new Machine({
+      initialState: 'init',
+      initialData: {},
+      transitions: {
+        'init>loading': true,
+        'loading>ok': (state, res) => res,
+        'loading>err': (state, res) => res,
+        'ok>loading': true,
+        'err>loading': true
+      }
+    })
+    
+    export default {
+      state: machine.current(),
+      reducers: {
+        next(prev, next, ...payload) {
+          return machine.next(next, ...payload).current()
+        }
+      },
+      effects: {
+        async read (opts) {
+          this.next('loading')
+          const res = await txn.readList(opts)
+          this.next('ok', res)
+        }
+      }
+    }
+```

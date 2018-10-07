@@ -37,7 +37,9 @@ describe('machine', () => {
       it('returns actual machine digest', () => {
         expect(machine.current()).toMatchObject({
           state: 'foo',
-          data: {}
+          data: {},
+          date: expect.any(Date),
+          id: expect.stringMatching(/^\d\.\d+$/)
         })
       })
     })
