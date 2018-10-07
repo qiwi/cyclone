@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/qiwi/cyclone/compare/v1.1.0...v1.2.0) (2018-10-07)
+
+
+### Features
+
+* add timestamp and unique id markers to history items ([f9e793e](https://github.com/qiwi/cyclone/commit/f9e793e)), closes [#8](https://github.com/qiwi/cyclone/issues/8)
+
 # [1.1.0](https://github.com/qiwi/cyclone/compare/v1.0.0...v1.1.0) (2018-10-04)
 
 
