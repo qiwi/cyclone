@@ -2,7 +2,7 @@ import Machine, {
   DEFAULT_HANDLER,
   DELIMITER,
   DEFAULT_OPTS
-} from '../main'
+} from '../../dist'
 
 describe('index', () => {
   it('properly exposes default and inners', () => {
