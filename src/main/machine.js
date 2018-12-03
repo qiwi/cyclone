@@ -58,7 +58,7 @@ export default class Machine implements IMachine {
     return this
   }
 
-  next (state: IState, ...payload?: Array<?IAny>): IMachine {
+  next (state: IState, ...payload: Array<?IAny>): IMachine {
     if (this.key) {
       throw new MachineError(LOCK_VIOLATION)
     }
