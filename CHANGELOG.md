@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/qiwi/cyclone/compare/v1.2.0...v1.3.0) (2019-01-17)
+
+
+### Features
+
+* migrate to typescript ([afc063b](https://github.com/qiwi/cyclone/commit/afc063b)), closes [#6](https://github.com/qiwi/cyclone/issues/6)
+
 # [1.2.0](https://github.com/qiwi/cyclone/compare/v1.1.0...v1.2.0) (2018-10-07)
 
 
