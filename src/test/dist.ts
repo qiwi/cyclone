@@ -2,7 +2,7 @@ import Machine, {
   DEFAULT_HANDLER,
   DELIMITER,
   DEFAULT_OPTS
-} from '../../dist'
+} from '../../lib/es5'
 
 describe('index', () => {
   it('properly exposes default and inners', () => {

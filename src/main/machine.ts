@@ -1,5 +1,3 @@
-// @flow
-
 import {
   MachineError,
   LOCK_VIOLATION,
@@ -12,7 +10,7 @@ import {
   generateId
 } from './generator'
 
-import type {
+import {
   IAny,
   IDigest,
   IHandler,
@@ -27,7 +25,7 @@ import type {
 
 import log from './log'
 
-export const DELIMITER = '>'
+export const DELIMITER: string = '>'
 export const DEFAULT_HANDLER: IHandler = data => data // echo
 export const DEFAULT_OPTS: IMachineOpts = {
   transitions: {},
@@ -35,13 +33,13 @@ export const DEFAULT_OPTS: IMachineOpts = {
 }
 
 export default class Machine implements IMachine {
-  opts: IMachineOpts
-  history: IHistory
-  key: IKey
-  transitions: ITransitions
+  public opts: IMachineOpts
+  public history: IHistory
+  public key: IKey
+  public transitions: ITransitions
 
-  constructor (opts: IMachineOpts): IMachine {
-    this.opts = {...DEFAULT_OPTS, ...opts}
+  constructor (opts: IMachineOpts) {
+    this.opts = { ...DEFAULT_OPTS, ...opts }
     this.history = []
     this.key = null
     this.transitions = opts.transitions
@@ -58,12 +56,12 @@ export default class Machine implements IMachine {
     return this
   }
 
-  next (state: IState, ...payload: Array<?IAny>): IMachine {
+  public next (state: IState, ...payload: Array<IAny>): IMachine {
     if (this.key) {
       throw new MachineError(LOCK_VIOLATION)
     }
 
-    const handler = this.constructor.getHandler(state, this.history, this.transitions)
+    const handler = Machine.getHandler(state, this.history, this.transitions)
     const current = this.current()
     const data = handler(current.data, ...payload)
     const id = generateId()
@@ -76,7 +74,7 @@ export default class Machine implements IMachine {
       date
     })
 
-    if (this.history.length > +this.opts.historySize) {
+    if (this.history.length > (this.opts.historySize || 0)) {
       log.debug('history limit reached')
       this.history.shift()
     }
@@ -84,11 +82,15 @@ export default class Machine implements IMachine {
     return this
   }
 
-  current (): IDigest {
-    return {...this.history[this.history.length - 1]}
+  public current (): IDigest {
+    return { ...this.history[this.history.length - 1] }
   }
 
-  prev (state?: IState): IMachine {
+  public prev (state?: string): IMachine {
+    if (state) {
+      console.log('Not implemented: https://github.com/qiwi/cyclone/issues/1')
+    }
+
     if (this.key) {
       throw new MachineError(LOCK_VIOLATION)
     }
@@ -101,7 +103,7 @@ export default class Machine implements IMachine {
     return this
   }
 
-  lock (key?: IKey): IMachine {
+  public lock (key?: IKey): IMachine {
     if (key) {
       this.key = key
     } else {
@@ -111,7 +113,7 @@ export default class Machine implements IMachine {
     return this
   }
 
-  unlock (key: IKey): IMachine {
+  public unlock (key: IKey): IMachine {
     if (this.key !== key) {
       throw new MachineError(INVALID_UNLOCK_KEY)
     }
@@ -121,7 +123,7 @@ export default class Machine implements IMachine {
     return this
   }
 
-  static getHandler (next: IState, history: IHistory, transitions: ITransitions): IHandler {
+  public static getHandler (next: IState, history: IHistory, transitions: ITransitions): IHandler {
     const targetTransition = this.getTargetTransition(next, history)
     const nextTransition = this.getTransition(targetTransition, transitions)
 
@@ -136,7 +138,7 @@ export default class Machine implements IMachine {
       : DEFAULT_HANDLER
   }
 
-  static getTransition (targetTransition: string, transitions: ITransitions): ?string {
+  public static getTransition (targetTransition: string, transitions: ITransitions): string | void {
     // TODO Support wildcards
     // TODO Support OR operator
     // TODO Generate patterns in constructor
@@ -150,7 +152,7 @@ export default class Machine implements IMachine {
 
   static getTargetTransition (next: IState, history: IHistory): string {
     return history
-      .map(({state}: IHistoryItem) => state)
+      .map(({ state }: IHistoryItem) => state)
       .concat(next)
       .join(DELIMITER)
   }

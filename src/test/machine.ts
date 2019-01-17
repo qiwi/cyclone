@@ -1,10 +1,18 @@
-import Machine, {DEFAULT_HANDLER} from '../main/machine'
-import {LOCK_VIOLATION, TRANSITION_VIOLATION, INVALID_UNLOCK_KEY} from '../main/error'
+import Machine, { DEFAULT_HANDLER } from '../main/machine'
+
+import {
+  LOCK_VIOLATION,
+  TRANSITION_VIOLATION,
+  INVALID_UNLOCK_KEY,
+  IHistory,
+  IMachineOpts,
+  ITransitions
+} from '../main'
 
 describe('machine', () => {
   describe('constructor', () => {
     it('returns proper instance', () => {
-      const opts = {
+      const opts: IMachineOpts = {
         historySize: 5,
         transitions: {
           'foo>bar': true
@@ -19,7 +27,7 @@ describe('machine', () => {
   })
 
   describe('prototype', () => {
-    const handler = (state, ...args) => args.reduce((memo, value) => ({...memo, ...value}))
+    const handler = (...args: any[]) => args.slice(1).reduce((memo, value) => ({ ...memo, ...value }))
     const opts = {
       initialData: {},
       initialState: 'foo',
@@ -46,10 +54,10 @@ describe('machine', () => {
 
     describe('#next', () => {
       it('proceeds to ne next step if transition exists', () => {
-        expect(machine.next('bar', {a: 'A'}, {b: 'B'})).toBe(machine)
+        expect(machine.next('bar', { a: 'A' }, { b: 'B' })).toBe(machine)
         expect(machine.current()).toMatchObject({
           state: 'bar',
-          data: {a: 'A', b: 'B'},
+          data: { a: 'A', b: 'B' },
           date: expect.any(Date),
           id: expect.stringMatching(/^\d\.\d+$/)
         })
@@ -74,13 +82,13 @@ describe('machine', () => {
           },
           initialState: 'foo'
         })
-        expect(machine.history).toMatchObject([{state: 'foo'}])
+        expect(machine.history).toMatchObject([{ state: 'foo' }])
         machine.next('bar')
         machine.next('baz')
-        expect(machine.history).toMatchObject([{state: 'foo'}, {state: 'bar'}, {state: 'baz'}])
+        expect(machine.history).toMatchObject([{ state: 'foo' }, { state: 'bar' }, { state: 'baz' }])
         machine.next('foo')
         machine.next('bar')
-        expect(machine.history).toMatchObject([{state: 'baz'}, {state: 'foo'}, {state: 'bar'}])
+        expect(machine.history).toMatchObject([{ state: 'baz' }, { state: 'foo' }, { state: 'bar' }])
       })
     })
 
@@ -134,10 +142,10 @@ describe('machine', () => {
   describe('static', () => {
     describe('#getTargetTransition', () => {
       it('return next transition related to history', () => {
-        const history = [
-          {state: 'foo', data: null},
-          {state: 'bar', data: null},
-          {state: 'baz', data: null}
+        const history: IHistory = [
+          { state: 'foo', data: null, id: '1', date: new Date() },
+          { state: 'bar', data: null, id: '2', date: new Date() },
+          { state: 'baz', data: null, id: '3', date: new Date() }
         ]
         const next = 'qux'
         expect(Machine.getTargetTransition(next, history)).toBe('foo>bar>baz>qux')
@@ -145,7 +153,7 @@ describe('machine', () => {
     })
 
     describe('#getTransition', () => {
-      const transitions = {
+      const transitions: ITransitions = {
         'foo>bar>baz': true,
         'foo>foo>bar>baz': true,
         'foo>baz': true
@@ -162,25 +170,25 @@ describe('machine', () => {
     })
 
     describe('#getHandler', () => {
-      const handler = () => {}
-      const transitions = {
+      const handler = () => ({})
+      const transitions: ITransitions = {
         'foo>bar>baz': handler,
         'foo>foo>bar>baz': true
       }
 
       it('returns custom handler if found', () => {
         const history = [
-          {state: 'foo', data: null},
-          {state: 'bar', data: null}
+          { state: 'foo', data: null, id: '1', date: new Date() },
+          { state: 'bar', data: null, id: '2', date: new Date() }
         ]
         expect(Machine.getHandler('baz', history, transitions)).toBe(handler)
       })
 
       it('returns default handler otherwise', () => {
         const history = [
-          {state: 'foo', data: null},
-          {state: 'foo', data: null},
-          {state: 'bar', data: null}
+          { state: 'foo', data: null, id: '1', date: new Date() },
+          { state: 'foo', data: null, id: '2', date: new Date() },
+          { state: 'bar', data: null, id: '3', date: new Date() }
         ]
         expect(Machine.getHandler('baz', history, transitions)).toBe(DEFAULT_HANDLER)
       })

@@ -1,5 +1,3 @@
-// @flow
-
 export const LOG_PREFIX = '[cyclone]'
 
 export const debug = console.debug.bind(console, LOG_PREFIX)
