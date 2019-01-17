@@ -33,9 +33,28 @@ export const DEFAULT_OPTS: IMachineOpts = {
 }
 
 export default class Machine implements IMachine {
+  /**
+   * Machine options.
+   * @property
+   */
   public opts: IMachineOpts
+
+  /**
+   * State history.
+   * @property
+   */
   public history: IHistory
+
+  /**
+   * Lock key.
+   * @property
+   */
   public key: IKey
+
+  /**
+   * Transition handler map
+   * @property
+   */
   public transitions: ITransitions
 
   constructor (opts: IMachineOpts) {
@@ -56,6 +75,11 @@ export default class Machine implements IMachine {
     return this
   }
 
+  /**
+   * Provides next state transition.
+   * @param state Next state name.
+   * @param payload Any data for handler.
+   */
   public next (state: IState, ...payload: Array<IAny>): IMachine {
     if (this.key) {
       throw new MachineError(LOCK_VIOLATION)
@@ -82,10 +106,17 @@ export default class Machine implements IMachine {
     return this
   }
 
+  /**
+   * Returns the machine's digest: state name and stored data.
+   */
   public current (): IDigest {
     return { ...this.history[this.history.length - 1] }
   }
 
+  /**
+   * Reverts current state to the previous.
+   * @param state
+   */
   public prev (state?: string): IMachine {
     if (state) {
       console.log('Not implemented: https://github.com/qiwi/cyclone/issues/1')
@@ -103,6 +134,10 @@ export default class Machine implements IMachine {
     return this
   }
 
+  /**
+   * Locks the machine. Any transitions are prohibited before unlocking.
+   * @param key
+   */
   public lock (key?: IKey): IMachine {
     if (key) {
       this.key = key
@@ -113,6 +148,10 @@ export default class Machine implements IMachine {
     return this
   }
 
+  /**
+   * Unlocks the machine.
+   * @param key
+   */
   public unlock (key: IKey): IMachine {
     if (this.key !== key) {
       throw new MachineError(INVALID_UNLOCK_KEY)
@@ -150,7 +189,7 @@ export default class Machine implements IMachine {
       .sort((a, b) => b.length - a.length)[0]
   }
 
-  static getTargetTransition (next: IState, history: IHistory): string {
+  public static getTargetTransition (next: IState, history: IHistory): string {
     return history
       .map(({ state }: IHistoryItem) => state)
       .concat(next)

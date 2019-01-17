@@ -15,8 +15,7 @@
     "flowgen": "mkdir -p flow-typed && node ./node_modules/ts-to-flow/bin/ts-to-flow.js lib",
     "test_with_report": "npm test && npm run coveralls_push",
     "coveralls_push": "cat ./coverage/lcov.info | coveralls",
-    "doc": "documentation build src/** -f html -o docs",
-    "docs": "npm run doc"
+    "docs": "typedoc src/main --ignoreCompilerErrors || exit 0"
   },
   "files": [
     "README.md",
