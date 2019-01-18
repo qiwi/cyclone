@@ -20,7 +20,7 @@ export type IMachineOpts = {
 }
 
 export type ITransitions = {
-  [key: string]: IHandler | null | true
+  [key: string]: IHandler | null | boolean
 }
 
 export type IHistoryItem = {
