@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/qiwi/cyclone/compare/v1.3.1...v2.0.0) (2019-01-20)
+
+
+### Features
+
+* add flow typings ([9365753](https://github.com/qiwi/cyclone/commit/9365753))
+
+
+### BREAKING CHANGES
+
+* removed default exports
+
 ## [1.3.1](https://github.com/qiwi/cyclone/compare/v1.3.0...v1.3.1) (2019-01-18)
 
 
