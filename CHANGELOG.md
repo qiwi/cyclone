@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/qiwi/cyclone/compare/v2.0.0...v2.0.1) (2019-01-20)
+
+
+### Bug Fixes
+
+* **libdef:** tweak up flowtype index declaration ([405e109](https://github.com/qiwi/cyclone/commit/405e109))
+
 # [2.0.0](https://github.com/qiwi/cyclone/compare/v1.3.1...v2.0.0) (2019-01-20)
 
 
