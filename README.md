@@ -23,24 +23,32 @@ If these points are not significant for you, `Stent` might be your best choice.
 * Lock mechanics
 * Multi-step transition declarations
 
+#### Typings
+Typescript libdef `typings/index.d.ts` is mounted by default.
+Flowtype `typings/index.flow.js` should be added manually to [`.flowconfig`](https://flow.org/en/docs/config/libs/) lib section:
+```
+[lib]
+./node_modules/@qiwi/cyclone/typings/
+```
+
 #### API
 ```javascript
-    import {Machine} from '@qiwi/cyclone'
-    
-    const handler1 = () => {}
-    const handler2 = () => {}
-    const opts = {
-      initialState: 'foo',
-      initialData: {a: 'AAA'},
-      transitions: {
-        'foo>bar': true,  // NOTE becomes `echo` by default
-        'bar>baz': handler1,
-        'baz>foo': handler2,
-        'foo>bar>baz>foo': handler1
-      },
-      historySize: 5,     // default = 10
-    }
-    const machine = new Machine(opts)
+import {Machine} from '@qiwi/cyclone'
+
+const handler1 = () => {}
+const handler2 = () => {}
+const opts = {
+  initialState: 'foo',
+  initialData: {a: 'AAA'},
+  transitions: {
+    'foo>bar': true,  // NOTE becomes `echo` by default
+    'bar>baz': handler1,
+    'baz>foo': handler2,
+    'foo>bar>baz>foo': handler1
+  },
+  historySize: 5,     // default = 10
+}
+const machine = new Machine(opts)
 ```
 
 ##### `current`
