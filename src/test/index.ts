@@ -1,4 +1,5 @@
-import Machine, {
+import {
+  Machine,
   DEFAULT_HANDLER,
   DELIMITER,
   DEFAULT_OPTS

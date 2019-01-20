@@ -1,12 +1,15 @@
-import Machine, { DEFAULT_HANDLER } from '../main/machine'
+import {
+  DEFAULT_HANDLER,
+  Machine,
+  IHistory,
+  IMachineOpts,
+  ITransitions
+} from '../main/machine'
 
 import {
   LOCK_VIOLATION,
   TRANSITION_VIOLATION,
-  INVALID_UNLOCK_KEY,
-  IHistory,
-  IMachineOpts,
-  ITransitions
+  INVALID_UNLOCK_KEY
 } from '../main'
 
 describe('machine', () => {

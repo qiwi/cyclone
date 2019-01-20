@@ -10,20 +10,7 @@ import {
   generateId
 } from './generator'
 
-import {
-  IAny,
-  IDigest,
-  IHandler,
-  IHistory,
-  IHistoryItem,
-  IKey,
-  IMachine,
-  IMachineOpts,
-  IState,
-  ITransitions
-} from './interface'
-
-import log from './log'
+import { log } from './log'
 
 export const DELIMITER: string = '>'
 export const DEFAULT_HANDLER: IHandler = data => data // echo
@@ -32,7 +19,53 @@ export const DEFAULT_OPTS: IMachineOpts = {
   historySize: 10
 }
 
-export default class Machine implements IMachine {
+type IAny = any
+
+type IKey = string | null
+
+type IState = string
+
+type IDigest = {
+  state?: IState,
+  data?: IAny
+}
+
+type IHandler = (data: IAny, ...payload: Array<IAny>) => IAny
+
+type ITransitions = {
+  [key: string]: IHandler | null | boolean
+}
+
+type IMachineOpts = {
+  transitions: ITransitions,
+  initialState?: IState,
+  initialData?: IAny,
+  immutable?: boolean,
+  historySize?: number
+}
+
+type IHistoryItem = {
+  state: IState,
+  data: IAny,
+  id: string,
+  date: Date
+}
+type IHistory = IHistoryItem[]
+
+interface IMachine {
+  next (state: IState, ...payload: Array<IAny>): IMachine,
+  prev (state?: IState): IMachine,
+  current (): IDigest,
+  lock (key?: IKey): IMachine,
+  unlock (key: IKey): IMachine,
+
+  transitions: ITransitions,
+  history: IHistory,
+  opts: IMachineOpts,
+  key: IKey,
+}
+
+export class Machine implements IMachine {
   /**
    * Machine options.
    * @property
@@ -195,4 +228,8 @@ export default class Machine implements IMachine {
       .concat(next)
       .join(DELIMITER)
   }
+}
+
+export {
+  IMachine, IHistory, ITransitions, IHistoryItem, IHandler, IMachineOpts
 }

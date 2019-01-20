@@ -2,26 +2,34 @@
   "name": "@qiwi/cyclone",
   "version": "1.3.1",
   "description": "\"State machine\" for basic purposes",
-  "main": "lib/es6/index.js",
+  "main": "lib/es5/index.js",
+  "types": "typings/index.d.ts",
   "scripts": {
     "jest": "jest --config=jest.config.json",
     "lint": "tslint src/**/*.ts --fix",
-    "flow": "flow",
     "test": "yarn lint && yarn jest",
-    "build": "rm -rf lib && yarn build_es5 && yarn build_es6 && yarn flowgen && yarn build_ts",
+    "clean": "rm -rf lib flow-typed",
+    "build": "yarn clean && yarn build_es5 && yarn build_es6 && yarn build_ts && yarn build_libdefs",
     "build_es5": "mkdir -p lib/es5 && tsc -p tsconfig.json --target ES5 --outDir lib/es5",
     "build_es6": "mkdir -p lib/es6 && tsc -p tsconfig.json --target ES6 --outDir lib/es6",
     "build_ts": "cp -r src/main/ lib/ts/",
-    "flowgen": "mkdir -p flow-typed && node ./node_modules/ts-to-flow/bin/ts-to-flow.js lib",
+    "build_ts_libdefs": "yarn dts && yarn append-index-libdef && yarn tsfix",
+    "build_flow_libdefs": "yarn flowgen && yarn flowfix",
+    "build_libdefs": "yarn build_ts_libdefs && yarn build_flow_libdefs",
+    "dts": "dts-generator --project ./ --out typings/index.d.ts",
+    "append-index-libdef": "cat typings/index.d.ts fixes/append.index.js | sponge typings/index.d.ts",
+    "flowgen": "flowgen typings/index.d.ts --output-file typings/index.flow.js",
     "test_with_report": "yarn test && yarn coveralls_push",
     "coveralls_push": "cat ./coverage/lcov.info | coveralls",
-    "docs": "typedoc src/main --ignoreCompilerErrors || exit 0"
+    "docs": "typedoc src/main --ignoreCompilerErrors || exit 0",
+    "tsfix": "replace-in-file --configFile=./fixes/tsfix.config.js",
+    "flowfix": "replace-in-file --configFile=./fixes/flowfix.config.js"
   },
   "files": [
     "README.md",
     "CHANGELOG.md",
     "lib",
-    "flow-typed"
+    "typings"
   ],
   "repository": {
     "type": "git",
@@ -36,7 +44,9 @@
   ],
   "author": "Anton Golub <a.golub@qiwi.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "replace-in-file": "^3.4.3"
+  },
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.8",
@@ -45,12 +55,12 @@
     "@types/jest": "^23.3.12",
     "@types/jest-json-schema": "^1.2.0",
     "coveralls": "^3.0.2",
+    "dts-generator": "^3.0.0",
     "eslint-plugin-typescript": "^0.14.0",
     "flowgen": "^1.3.0",
     "jest": "^23.6.0",
     "semantic-release": "^15.13.3",
     "ts-jest": "^23.10.5",
-    "ts-to-flow": "^0.0.3",
     "tslib": "^1.9.3",
     "tslint": "^5.12.1",
     "tslint-config-standard": "^8.0.1",
