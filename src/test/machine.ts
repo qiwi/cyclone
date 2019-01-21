@@ -26,6 +26,7 @@ describe('machine', () => {
       const machine = new Machine(opts)
 
       expect(machine).toBeInstanceOf(Machine)
+      expect(machine.id).toEqual(expect.any(String))
       expect(machine.opts).toEqual(opts)
       expect(machine.transitions).toBe(opts.transitions)
     })

@@ -65,6 +65,7 @@ interface IMachine {
   history: IHistory,
   opts: IMachineOpts,
   key: IKey,
+  id: string,
 }
 
 export class Machine implements IMachine {
@@ -87,6 +88,12 @@ export class Machine implements IMachine {
   public key: IKey
 
   /**
+   * Unique machine id
+   * @property
+   */
+  public id: string
+
+  /**
    * Transition handler map
    * @property
    */
@@ -96,6 +103,7 @@ export class Machine implements IMachine {
     this.opts = { ...DEFAULT_OPTS, ...opts }
     this.history = []
     this.key = null
+    this.id = generateId()
     this.transitions = opts.transitions
 
     if (typeof opts.initialState === 'string') {

@@ -27,7 +27,7 @@ export const factory = (opts: IFactoryOpts): IMachine => {
   const machineOpts: IMachineOpts = { ...DEFAULT_MACHINE_OPTS, ..._template, ...machine }
   const instance = new Machine(machineOpts)
 
-  machineRegistry.add(Math.random() + '', instance)
+  machineRegistry.add(instance.id, instance)
 
   return instance
 }
