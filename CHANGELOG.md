@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/qiwi/cyclone/compare/v2.3.0...v2.4.0) (2019-01-21)
+
+
+### Features
+
+* **Machine:** implement simple state history search — `last` method ([c293f25](https://github.com/qiwi/cyclone/commit/c293f25))
+
 # [2.3.0](https://github.com/qiwi/cyclone/compare/v2.2.0...v2.3.0) (2019-01-21)
 
 
