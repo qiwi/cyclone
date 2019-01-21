@@ -1,5 +1,6 @@
 import {
   DEFAULT_HANDLER,
+  DEFAULT_HISTORY_SIZE,
   Machine,
   IHistory,
   IMachineOpts,
@@ -17,6 +18,7 @@ describe('machine', () => {
     it('returns proper instance', () => {
       const opts: IMachineOpts = {
         historySize: 5,
+        immutable: false,
         transitions: {
           'foo>bar': true
         }
@@ -198,6 +200,19 @@ describe('machine', () => {
 
       it('throws Error if no match found', () => {
         expect(() => Machine.getHandler('qux', [], transitions)).toThrowError()
+      })
+    })
+
+    describe('#getHistoryLength', () => {
+      it('returns proper values', () => {
+        const cases = [
+          [undefined, DEFAULT_HISTORY_SIZE],
+          [0, 0],
+          [-1, Number.POSITIVE_INFINITY],
+          [1, 1]
+        ]
+
+        cases.forEach(([input, output]) => expect(Machine.getHistoryLimit(input)).toBe(output))
       })
     })
   })

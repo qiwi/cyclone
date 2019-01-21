@@ -14,9 +14,11 @@ import { log } from './log'
 
 export const DELIMITER: string = '>'
 export const DEFAULT_HANDLER: IHandler = data => data // echo
+export const DEFAULT_HISTORY_SIZE: number = 10
 export const DEFAULT_OPTS: IMachineOpts = {
   transitions: {},
-  historySize: 10
+  historySize: DEFAULT_HISTORY_SIZE,
+  immutable: false
 }
 
 type IAny = any
@@ -131,7 +133,7 @@ export class Machine implements IMachine {
       date
     })
 
-    if (this.history.length > (this.opts.historySize || 0)) {
+    if (this.history.length > Machine.getHistoryLimit(this.opts.historySize)) {
       log.debug('history limit reached')
       this.history.shift()
     }
@@ -193,6 +195,18 @@ export class Machine implements IMachine {
     this.key = null
 
     return this
+  }
+
+  public static getHistoryLimit (historySize?: number): number {
+    if (historySize === undefined) {
+      return DEFAULT_HISTORY_SIZE
+    }
+
+    if (historySize === -1) {
+      return Number.POSITIVE_INFINITY
+    }
+
+    return historySize
   }
 
   public static getHandler (next: IState, history: IHistory, transitions: ITransitions): IHandler {
