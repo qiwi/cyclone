@@ -47,9 +47,7 @@
   ],
   "author": "Anton Golub <a.golub@qiwi.com>",
   "license": "MIT",
-  "dependencies": {
-    "replace-in-file": "^3.4.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.8",
@@ -65,6 +63,7 @@
     "jest": "^23.6.0",
     "lodash": "^4.17.11",
     "semantic-release": "^15.13.3",
+    "replace-in-file": "^3.4.3",
     "ts-jest": "^23.10.5",
     "tslib": "^1.9.3",
     "tslint": "^5.12.1",
