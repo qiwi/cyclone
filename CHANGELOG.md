@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/qiwi/cyclone/compare/v2.0.1...v2.1.0) (2019-01-21)
+
+
+### Features
+
+* **machine:** alias historySize: -1 to positive infinity ([cc42374](https://github.com/qiwi/cyclone/commit/cc42374)), closes [#14](https://github.com/qiwi/cyclone/issues/14)
+
 ## [2.0.1](https://github.com/qiwi/cyclone/compare/v2.0.0...v2.0.1) (2019-01-20)
 
 
