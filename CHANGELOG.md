@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/qiwi/cyclone/compare/v2.2.0...v2.3.0) (2019-01-21)
+
+
+### Features
+
+* generate unique machine id ([ad3ff6c](https://github.com/qiwi/cyclone/commit/ad3ff6c))
+
 # [2.2.0](https://github.com/qiwi/cyclone/compare/v2.1.0...v2.2.0) (2019-01-21)
 
 
