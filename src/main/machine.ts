@@ -68,6 +68,8 @@ interface IMachine {
   id: string,
 }
 
+type IPredicate = (item: IHistoryItem) => boolean
+
 export class Machine implements IMachine {
   /**
    * Machine options.
@@ -154,6 +156,21 @@ export class Machine implements IMachine {
    */
   public current (): IDigest {
     return { ...this.history[this.history.length - 1] }
+  }
+
+  /**
+   * Returns the last state, that satisfies the condition
+   */
+  public last (condition?: string | IPredicate): IDigest | void {
+    if (condition === undefined) {
+      return this.current()
+    }
+
+    const filter = typeof condition === 'string'
+      ? ({ state }: IHistoryItem) => state === condition
+      : condition
+
+    return this.history.reverse().find(filter)
   }
 
   /**

@@ -58,6 +58,56 @@ describe('machine', () => {
       })
     })
 
+    describe('#last', () => {
+      const opts = {
+        transitions: {
+          'foo>foo': true,
+          'foo>bar': true
+        }
+      }
+      const machine = new Machine(opts)
+
+      machine.history = [{
+        id: '1',
+        state: 'foo',
+        data: 1,
+        date: new Date()
+      }, {
+        id: '2',
+        state: 'foo',
+        data: 2,
+        date: new Date()
+      }, {
+        id: '3',
+        state: 'bar',
+        data: 3,
+        date: new Date()
+      }]
+
+      it('returns last by key', () => {
+        expect(machine.last('foo')).toMatchObject({
+          state: 'foo',
+          data: 2
+        })
+      })
+
+      it('finds last by condition', () => {
+        expect(machine.last(({ state, data }) => state === 'foo' && data === 1)).toMatchObject({
+          state: 'foo',
+          data: 1
+        })
+      })
+
+      it('returns undefined if not found', () => {
+        expect(machine.last(({ state }) => state === 'baz')).toBeUndefined()
+        expect(machine.last('baz')).toBeUndefined()
+      })
+
+      it('returns `current` if no condition passed', () => {
+        expect(machine.last()).toEqual(machine.current())
+      })
+    })
+
     describe('#next', () => {
       it('proceeds to ne next step if transition exists', () => {
         expect(machine.next('bar', { a: 'A' }, { b: 'B' })).toBe(machine)
