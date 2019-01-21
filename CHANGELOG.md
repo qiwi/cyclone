@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/qiwi/cyclone/compare/v2.1.0...v2.2.0) (2019-01-21)
+
+
+### Features
+
+* add machine factory ([3f33997](https://github.com/qiwi/cyclone/commit/3f33997)), closes [#10](https://github.com/qiwi/cyclone/issues/10)
+
 # [2.1.0](https://github.com/qiwi/cyclone/compare/v2.0.1...v2.1.0) (2019-01-21)
 
 
