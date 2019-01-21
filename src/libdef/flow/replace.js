@@ -1,5 +1,5 @@
 module.exports = {
-  files: 'typings/**/*.js',
+  files: 'typings/*.js',
   from: [
     'this',
     'mixins IMachine ',
