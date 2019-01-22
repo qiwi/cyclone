@@ -10,7 +10,8 @@ import {
 import {
   LOCK_VIOLATION,
   TRANSITION_VIOLATION,
-  INVALID_UNLOCK_KEY
+  INVALID_UNLOCK_KEY,
+  UNREACHABLE_STATE
 } from '../main'
 
 describe('machine', () => {
@@ -149,23 +150,69 @@ describe('machine', () => {
     })
 
     describe('#prev', () => {
-      it('rollbacks to prev state if exists', () => {
-        expect(machine.prev()).toBe(machine)
-        expect(machine.current()).toMatchObject({
-          state: 'foo',
-          data: {},
-          date: expect.any(Date),
-          id: expect.stringMatching(/^\d\.\d+$/)
-        })
-      })
-
-      it('throws transition error otherwise', () => {
-        expect(() => machine.prev()).toThrow(TRANSITION_VIOLATION)
-      })
+      const opts = {
+        transitions: {
+          'foo>foo': true,
+          'foo>bar': true,
+          'bar>baz': true
+        }
+      }
+      const machine = new Machine(opts)
+      machine.history = [{
+        id: '0',
+        state: 'foo',
+        data: 0,
+        date: new Date()
+      }, {
+        id: '1',
+        state: 'foo',
+        data: 1,
+        date: new Date()
+      }, {
+        id: '2',
+        state: 'bar',
+        data: 2,
+        date: new Date()
+      }, {
+        id: '3',
+        state: 'baz',
+        data: 3,
+        date: new Date()
+      }]
 
       it('asserts lock status', () => {
         machine.lock()
-        expect(() => machine.prev('qux')).toThrow(LOCK_VIOLATION)
+        expect(() => machine.prev()).toThrow(LOCK_VIOLATION)
+        machine.unlock(machine.key)
+      })
+
+      it('rollbacks to prev state if exists', () => {
+        expect(machine.prev()).toBe(machine)
+        expect(machine.current()).toMatchObject({
+          state: 'bar',
+          data: 2,
+          date: expect.any(Date),
+          id: '2'
+        })
+      })
+
+      it('throws transition violation if target state not found', () => {
+        expect(() => machine.prev('qux')).toThrow(UNREACHABLE_STATE)
+      })
+
+      it('rollbacks by condition', () => {
+        expect(machine.prev(({ id }) => id === '0')).toBe(machine)
+
+        expect(machine.current()).toMatchObject({
+          state: 'foo',
+          data: 0,
+          date: expect.any(Date),
+          id: '0'
+        })
+      })
+
+      it('throws transition violation otherwise', () => {
+        expect(() => machine.prev()).toThrow(UNREACHABLE_STATE)
       })
     })
 

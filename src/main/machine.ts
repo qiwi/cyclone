@@ -2,7 +2,8 @@ import {
   MachineError,
   LOCK_VIOLATION,
   TRANSITION_VIOLATION,
-  INVALID_UNLOCK_KEY
+  INVALID_UNLOCK_KEY,
+  UNREACHABLE_STATE
 } from './error'
 
 import {
@@ -154,14 +155,14 @@ export class Machine implements IMachine {
   /**
    * Returns the machine's digest: state name and stored data.
    */
-  public current (): IDigest {
+  public current (): IHistoryItem {
     return { ...this.history[this.history.length - 1] }
   }
 
   /**
    * Returns the last state, that satisfies the condition
    */
-  public last (condition?: string | IPredicate): IDigest | void {
+  public last (condition?: string | IPredicate): IHistoryItem | void {
     if (condition === undefined) {
       return this.current()
     }
@@ -170,27 +171,35 @@ export class Machine implements IMachine {
       ? ({ state }: IHistoryItem) => state === condition
       : condition
 
-    return this.history.reverse().find(filter)
+    return [...this.history].reverse().find(filter)
   }
 
   /**
    * Reverts current state to the previous.
    * @param state
    */
-  public prev (state?: string): IMachine {
-    if (state) {
-      console.log('Not implemented: https://github.com/qiwi/cyclone/issues/1')
-    }
-
+  public prev (state?: string | IPredicate): IMachine {
     if (this.key) {
       throw new MachineError(LOCK_VIOLATION)
     }
 
     if (this.history.length < 2) {
-      throw new MachineError(TRANSITION_VIOLATION)
+      throw new MachineError(UNREACHABLE_STATE)
     }
 
-    this.history.pop()
+    if (state !== undefined) {
+      const last = this.last(state)
+
+      if (!last) {
+        throw new MachineError(UNREACHABLE_STATE)
+      }
+
+      this.history.length = this.history.indexOf(last) + 1
+
+    } else {
+      this.history.pop()
+    }
+
     return this
   }
 
