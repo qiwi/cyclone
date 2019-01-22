@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/qiwi/cyclone/compare/v2.4.0...v2.5.0) (2019-01-22)
+
+
+### Features
+
+* **Machine:** add conditions to `#prev`method ([73c2d90](https://github.com/qiwi/cyclone/commit/73c2d90)), closes [#1](https://github.com/qiwi/cyclone/issues/1) [#15](https://github.com/qiwi/cyclone/issues/15)
+
 # [2.4.0](https://github.com/qiwi/cyclone/compare/v2.3.0...v2.4.0) (2019-01-21)
 
 
