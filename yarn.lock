@@ -2042,17 +2042,17 @@ find-versions@^3.0.0:
     array-uniq "^2.0.0"
     semver-regex "^2.0.0"
 
-flowgen@1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/flowgen/-/flowgen-1.4.1.tgz#7e7ff1f7b99adbc8dd99ba407728dcdf205239f8"
-  integrity sha512-ELPn6zHS2U2wMtDP3rYCQGZrZOLR6l0ZLG1QfAxOCO0GPKwrmIaPB2Q5WPT8wpiUUzEpRYHgSukFkVt9VQ2V1g==
+flowgen@1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/flowgen/-/flowgen-1.5.4.tgz#c249ab59266fd619460a5fc2e75c9c9485b05199"
+  integrity sha512-4M6DFUy59s4ZffboZ2EnVmVkRS7Y1AFzHfL7QVsswdAcGKs6Y9i0ptz6LBeHYUX3u+IPbXvTfbZdqgHbmg2u9g==
   dependencies:
     commander "^2.11.0"
     lodash "^4.17.4"
     paralleljs "^0.2.1"
     prettier "^1.12.1"
     shelljs "^0.8.2"
-    typescript "~2.4.2"
+    typescript "^3.3.1"
     typescript-compiler "^1.4.1-2"
 
 flush-write-stream@^1.0.0:
@@ -6250,11 +6250,6 @@ typescript@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.1.tgz#6de14e1db4b8a006ac535e482c8ba018c55f750b"
   integrity sha512-cTmIDFW7O0IHbn1DPYjkiebHxwtCMU+eTy30ZtJNBPF9j2O1ITu5XH2YnBeVRKWHqF+3JQwWJv0Q0aUgX8W7IA==
-
-typescript@~2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.2.tgz#f8395f85d459276067c988aa41837a8f82870844"
-  integrity sha1-+DlfhdRZJ2BnyYiqQYN6j4KHCEQ=
 
 uglify-js@^3.1.4:
   version "3.4.9"
