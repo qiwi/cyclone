@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/qiwi/cyclone/compare/v2.5.0...v3.0.0) (2019-02-09)
+
+
+### Features
+
+* **machine:** default handler enhancement ([76f80b0](https://github.com/qiwi/cyclone/commit/76f80b0)), closes [#22](https://github.com/qiwi/cyclone/issues/22)
+
+
+### BREAKING CHANGES
+
+* **machine:** from now default handler returns the last passed argument as a result
+
 # [2.5.0](https://github.com/qiwi/cyclone/compare/v2.4.0...v2.5.0) (2019-01-22)
 
 
