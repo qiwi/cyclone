@@ -187,18 +187,17 @@ export class Machine implements IMachine {
       throw new MachineError(UNREACHABLE_STATE)
     }
 
-    if (state !== undefined) {
-      const last = this.last(state)
-
-      if (!last) {
-        throw new MachineError(UNREACHABLE_STATE)
-      }
-
-      this.history.length = this.history.indexOf(last) + 1
-
-    } else {
+    if (state === undefined) {
       this.history.pop()
+      return this
     }
+
+    const last = this.last(state)
+    if (!last) {
+      throw new MachineError(UNREACHABLE_STATE)
+    }
+
+    this.history.length = this.history.indexOf(last) + 1
 
     return this
   }
