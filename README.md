@@ -41,7 +41,7 @@ const opts = {
   initialState: 'foo',
   initialData: {a: 'AAA'},
   transitions: {
-    'foo>bar': true,  // NOTE becomes `echo` by default
+    'foo>bar': true,  // NOTE applies static DEFAULT_HANDLER
     'bar>baz': handler1,
     'baz>foo': handler2,
     'foo>bar>baz>foo': handler1
@@ -50,7 +50,7 @@ const opts = {
 }
 const machine = new Machine(opts)
 ```
-
+### Proto
 ##### `current`
 Returns machine state digest:
 ```javascript
@@ -80,6 +80,13 @@ Prevents state update.
     machine.unlock('invalidKey')    // MachineError: Invalid unlock key
     machine.unlock('key')
 ``` 
+
+### Static
+##### DEFAULT_HANDLER
+```javascript
+DEFAULT_HANDLER('foo', 'bar')        // 'bar'
+DEFAULT_HANDLER('foo', 'bar', 'baz') // 'baz'
+```
 
 #### Usage examples
 Imagine, [Rematch](https://github.com/rematch/rematch) model:

@@ -313,5 +313,12 @@ describe('machine', () => {
         cases.forEach(([input, output]) => expect(Machine.getHistoryLimit(input)).toBe(output))
       })
     })
+
+    describe('#DEFAULT_HANDLER', () => {
+      it('returns the last passed argument as a result', () => {
+        expect(DEFAULT_HANDLER('foo')).toBe('foo')
+        expect(DEFAULT_HANDLER('foo', 'bar')).toBe('bar')
+      })
+    })
   })
 })

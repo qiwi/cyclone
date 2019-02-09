@@ -14,7 +14,7 @@ import {
 import { log } from './log'
 
 export const DELIMITER: string = '>'
-export const DEFAULT_HANDLER: IHandler = data => data // echo
+export const DEFAULT_HANDLER: IHandler = (...last) => last.pop()
 export const DEFAULT_HISTORY_SIZE: number = 10
 export const DEFAULT_OPTS: IMachineOpts = {
   transitions: {},
@@ -276,6 +276,8 @@ export class Machine implements IMachine {
       .concat(next)
       .join(DELIMITER)
   }
+
+  public DEFAULT_HANDLER = DEFAULT_HANDLER
 }
 
 export {
