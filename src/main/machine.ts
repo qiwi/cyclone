@@ -277,6 +277,12 @@ export class Machine implements IMachine {
       .join(DELIMITER)
   }
 
+  /**
+   * Returns the last passes argument as a result
+   * @param {*} state
+   * @param {*} [payload]
+   * @return {*}
+   */
   public DEFAULT_HANDLER = DEFAULT_HANDLER
 }
 
