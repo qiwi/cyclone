@@ -207,11 +207,9 @@ export class Machine implements IMachine {
    * @param key
    */
   public lock (key?: IKey): IMachine {
-    if (key) {
-      this.key = key
-    } else {
-      this.key = `lock${Math.random()}`
-    }
+    this.key = key
+      ? key
+      : `lock${generateId()}`
 
     return this
   }
