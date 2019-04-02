@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/qiwi/cyclone/compare/v3.0.0...v3.0.1) (2019-04-02)
+
+
+### Bug Fixes
+
+* **package:** add missed tslib dep ([351edca](https://github.com/qiwi/cyclone/commit/351edca))
+
 # [3.0.0](https://github.com/qiwi/cyclone/compare/v2.5.0...v3.0.0) (2019-02-09)
 
 
