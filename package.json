@@ -47,7 +47,9 @@
   ],
   "author": "Anton Golub <a.golub@qiwi.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "tslib": "^1.9.3"
+  },
   "devDependencies": {
     "@semantic-release/changelog": "^3.0.2",
     "@semantic-release/git": "^7.0.8",
@@ -62,11 +64,11 @@
     "flowgen": "1.5.8",
     "jest": "^24.1.0",
     "lodash": "^4.17.11",
-    "semantic-release": "^15.13.3",
     "replace-in-file": "^3.4.3",
+    "semantic-release": "^15.13.3",
     "ts-jest": "^24.0.0",
-    "tslib": "^1.9.3",
     "tslint": "^5.12.1",
+    "tslint-config-qiwi": "^1.0.1",
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.3",
