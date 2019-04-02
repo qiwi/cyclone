@@ -1,4 +1,5 @@
 export class Registry {
+
   store: { [key: string]: any }
 
   constructor () {
@@ -16,4 +17,5 @@ export class Registry {
   remove (key: string): void {
     delete this.store[key]
   }
+
 }

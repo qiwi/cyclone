@@ -6,7 +6,7 @@
   "types": "typings/index.d.ts",
   "scripts": {
     "jest": "jest --config=jest.config.json",
-    "lint": "tslint src/**/*.ts",
+    "lint": "tslint -p tsconfig.lint.json src/**/*.ts",
     "lint:fix": "yarn lint -- --fix",
     "test": "yarn lint && yarn jest",
     "clean": "rm -rf lib typings",

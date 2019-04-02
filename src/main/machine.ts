@@ -72,6 +72,7 @@ interface IMachine {
 type IPredicate = (item: IHistoryItem) => boolean
 
 export class Machine implements IMachine {
+
   /**
    * Machine options.
    * @property
@@ -281,6 +282,7 @@ export class Machine implements IMachine {
    * @return {*}
    */
   public DEFAULT_HANDLER = DEFAULT_HANDLER
+
 }
 
 export {
