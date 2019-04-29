@@ -122,3 +122,7 @@ Imagine, [Rematch](https://github.com/rematch/rematch) model:
       }
     }
 ```
+
+### Similar projects
+* [ericelliott/redux-dsm](https://github.com/ericelliott/redux-dsm)
+* [krasimir/stent](https://github.com/krasimir/stent)
