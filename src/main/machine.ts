@@ -277,9 +277,9 @@ export class Machine implements IMachine {
 
   /**
    * Returns the last passes argument as a result
-   * @param {*} state
-   * @param {*} [payload]
-   * @return {*}
+   * @param {any} state
+   * @param {any} [payload]
+   * @return {any}
    */
   public DEFAULT_HANDLER = DEFAULT_HANDLER
 
