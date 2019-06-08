@@ -58,7 +58,7 @@
     "@semantic-release/npm": "^5.1.7",
     "@types/jest": "^24.0.13",
     "@types/jest-json-schema": "^1.2.1",
-    "coveralls": "^3.0.3",
+    "coveralls": "^3.0.4",
     "dts-generator": "^3.0.0",
     "eslint-plugin-typescript": "^0.14.0",
     "esm": "^3.2.25",
@@ -68,11 +68,11 @@
     "replace-in-file": "^4.1.0",
     "semantic-release": "^15.13.12",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.16.0",
+    "tslint": "^5.17.0",
     "tslint-config-qiwi": "^1.0.1",
     "tslint-config-standard": "^8.0.1",
     "typedoc": "^0.14.2",
-    "typescript": "^3.4.5",
+    "typescript": "^3.5.1",
     "typescript-eslint-parser": "^22.0.0"
   },
   "release": {
