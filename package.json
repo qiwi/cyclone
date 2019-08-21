@@ -1,6 +1,6 @@
 {
   "name": "@qiwi/cyclone",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "\"State machine\" for basic purposes",
   "main": "target/es5/index.js",
   "types": "typings/index.d.ts",
@@ -14,12 +14,10 @@
     "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
     "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.es6.json",
     "build:ts": "cp -r src/main/ target/ts/",
-
     "dtsgen": "dts-generator --project ./ --out typings/index.d.ts --prefix @qiwi/cyclone/target/es5 --name @qiwi/cyclone --main @qiwi/cyclone/target/es5/index --moduleResolution node",
     "flowgen": "flowgen typings/index.d.ts --output-file flow-typed/index.flow.js",
     "libdef": "yarn dtsgen && yarn libdeffix && yarn flowgen",
     "libdeffix": "node -r esm ./src/gen/js/libdef-fix.js --dts=./typings/index.d.ts",
-    
     "test:report": "yarn test && yarn coveralls:push",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls",
     "docs": "typedoc src/main --ignoreCompilerErrors || exit 0"

@@ -1,3 +1,10 @@
+## [3.0.2](https://github.com/qiwi/cyclone/compare/v3.0.1...v3.0.2) (2019-08-21)
+
+
+### Performance Improvements
+
+* update build script & repack ([b6fbedf](https://github.com/qiwi/cyclone/commit/b6fbedf))
+
 ## [3.0.1](https://github.com/qiwi/cyclone/compare/v3.0.0...v3.0.1) (2019-04-02)
 
 
