@@ -21,7 +21,7 @@
     "libdeffix": "node -r esm ./src/gen/js/libdef-fix.js --dts=./typings/index.d.ts",
     
     "test:report": "yarn test && yarn coveralls:push",
-    "coveralls:_push": "cat ./coverage/lcov.info | coveralls",
+    "coveralls:push": "cat ./coverage/lcov.info | coveralls",
     "docs": "typedoc src/main --ignoreCompilerErrors || exit 0"
   },
   "files": [
