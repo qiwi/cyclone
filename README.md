@@ -24,12 +24,8 @@ If these points are not significant for you, `Stent` might be your best choice.
 * Multi-step transition declarations
 
 #### Typings
-Typescript libdef `typings/index.d.ts` is mounted by default.
-Flowtype `typings/index.flow.js` should be added manually to [`.flowconfig`](https://flow.org/en/docs/config/libs/) lib section:
-```
-[lib]
-./node_modules/@qiwi/cyclone/typings/
-```
+* Typescript `typings/index.d.ts`
+* Flowtype libdef `flow-typed/index.flow.js` should be found by Flow. If not, add `[lib]` section to [`.flowconfig`](https://flow.org/en/docs/config/libs/) 
 
 #### API
 ```javascript
