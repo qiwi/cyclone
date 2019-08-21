@@ -5,14 +5,14 @@ import {
   IHistory,
   IMachineOpts,
   ITransitions
-} from '../main/machine'
+} from '../../main/ts/machine'
 
 import {
   LOCK_VIOLATION,
   TRANSITION_VIOLATION,
   INVALID_UNLOCK_KEY,
   UNREACHABLE_STATE
-} from '../main'
+} from '../../main/ts'
 
 describe('machine', () => {
   describe('constructor', () => {

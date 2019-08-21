@@ -1,4 +1,4 @@
-import { generateDate, generateId } from '../main/generator'
+import { generateDate, generateId } from '../../main/ts/generator'
 
 describe('generator', () => {
   describe('generateId', () => {

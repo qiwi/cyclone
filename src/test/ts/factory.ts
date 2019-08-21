@@ -1,12 +1,12 @@
-import { Registry } from '../main/registry'
-import { Machine } from '../main/machine'
+import { Registry } from '../../main/ts/registry'
+import { Machine } from '../../main/ts/machine'
 import {
   factory,
   getTemplate,
   DEFAULT_TEMPLATE,
   DEFAULT_MACHINE_REGISTRY,
   DEFAULT_TEMPLATE_REGISTRY
-} from '../main/factory'
+} from '../../main/ts/factory'
 
 describe('factory', () => {
   it('exposes defaults', () => {

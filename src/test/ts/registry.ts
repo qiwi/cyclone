@@ -1,4 +1,4 @@
-import { Registry } from '../main/registry'
+import { Registry } from '../../main/ts/registry'
 
 describe('Registry', () => {
   describe('constructor', () => {

@@ -4,7 +4,7 @@ import {
   DEFAULT_HANDLER,
   DELIMITER,
   DEFAULT_OPTS
-} from '../main'
+} from '../../main/ts'
 
 describe('index', () => {
   it('properly exposes default and inners', () => {
