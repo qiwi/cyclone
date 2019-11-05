@@ -6409,6 +6409,13 @@ tslint-config-standard@^8.0.1:
   dependencies:
     tslint-eslint-rules "^5.3.1"
 
+tslint-config-standard@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/tslint-config-standard/-/tslint-config-standard-9.0.0.tgz#349a94819d93d5f8d803e3c71cb58ef38eff88e0"
+  integrity sha512-CAw9J743RnPMemQV/XQ4YyNreC+A1NItACfkm+cBedrOkz6CQfwlnbKn8anUXBfoa4Zo4tjAhblRbsMNcSLfSw==
+  dependencies:
+    tslint-eslint-rules "^5.3.1"
+
 tslint-eslint-rules@^5.3.1:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/tslint-eslint-rules/-/tslint-eslint-rules-5.4.0.tgz#e488cc9181bf193fe5cd7bfca213a7695f1737b5"
