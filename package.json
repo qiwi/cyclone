@@ -44,7 +44,7 @@
   "author": "Anton Golub <a.golub@qiwi.com>",
   "license": "MIT",
   "dependencies": {
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.0",
