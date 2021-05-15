@@ -815,10 +815,10 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
-"@types/jest-json-schema@^2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@types/jest-json-schema/-/jest-json-schema-2.1.1.tgz#9e7edce508fc609cf25f0b486c8d1ee47733608a"
-  integrity sha512-gZ2DH3VKBoQBvlfWUoyttgO+obMx2jcK97b1HrAGRcHOlSjb8RCIW5zXE2WocUxkPgyxp62zSIuScjhsto5pWQ==
+"@types/jest-json-schema@2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@types/jest-json-schema/-/jest-json-schema-2.1.3.tgz#0a75f0c2f9673249fa790d01a72754aa9402cda4"
+  integrity sha512-WWL2gD1UyhYHFjIoSg9WEEI6hQKBG1C5CRIntU3jHXqiGcY6TW5lweDh6aY+IkskxWfpq/NAu9HzAbPEanX9rg==
   dependencies:
     "@types/jest" "*"
     ajv "^6.10.2"
