@@ -58,7 +58,7 @@
     "eslint-plugin-typescript": "^0.14.0",
     "esm": "^3.2.25",
     "flowgen": "1.10.0",
-    "jest": "^25.1.0",
+    "jest": "25.5.4",
     "lodash": "^4.17.15",
     "replace-in-file": "^5.0.2",
     "semantic-release": "^17.0.2",
