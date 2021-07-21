@@ -59,7 +59,7 @@
     "esm": "^3.2.25",
     "flowgen": "1.14.1",
     "jest": "^27.0.4",
-    "lodash": "^4.17.21",
+    "lodash": "4.17.21",
     "replace-in-file": "^6.2.0",
     "semantic-release": "^17.4.3",
     "ts-jest": "27.0.4",
