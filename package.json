@@ -60,7 +60,7 @@
     "flowgen": "1.14.1",
     "jest": "^27.0.4",
     "lodash": "^4.17.21",
-    "replace-in-file": "^6.2.0",
+    "replace-in-file": "6.3.5",
     "semantic-release": "^17.4.3",
     "ts-jest": "27.0.4",
     "tslint": "^6.1.3",
