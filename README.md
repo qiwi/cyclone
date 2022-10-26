@@ -1,7 +1,7 @@
 # @qiwi/cyclone
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
-[![buildStatus](https://api.travis-ci.com/qiwi/cyclone.svg?branch=master)](https://travis-ci.com/qiwi/cyclone)
+[![CI](https://github.com/qiwi/buildstamp/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/qiwi/buildstamp/actions/workflows/ci.yaml)
 [![dependencyStatus](https://img.shields.io/david/qiwi/cyclone.svg?maxAge=3600)](https://david-dm.org/qiwi/cyclone)
 [![devDependencyStatus](https://img.shields.io/david/dev/qiwi/cyclone.svg?maxAge=3600)](https://david-dm.org/qiwi/cyclone)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/qiwi/cyclone)
