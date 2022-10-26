@@ -1,18 +1,16 @@
 import {
-  DEFAULT_HANDLER,
-  DEFAULT_HISTORY_SIZE,
-  Machine,
-  IHistory,
-  IMachineOpts,
-  ITransitions
-} from '../../main/ts/machine'
-
-import {
+  INVALID_UNLOCK_KEY,
   LOCK_VIOLATION,
   TRANSITION_VIOLATION,
-  INVALID_UNLOCK_KEY,
   UNREACHABLE_STATE
 } from '../../main/ts'
+import {
+  DEFAULT_HANDLER,
+  DEFAULT_HISTORY_SIZE,
+  IHistory,
+  IMachineOpts,
+  ITransitions,
+  Machine} from '../../main/ts/machine'
 
 describe('machine', () => {
   describe('constructor', () => {

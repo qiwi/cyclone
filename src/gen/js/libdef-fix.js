@@ -1,14 +1,14 @@
-import {resolve} from 'path'
-import { argv } from 'yargs'
 import assert from 'assert'
+import {resolve} from 'path'
 import {sync as replaceSync} from 'replace-in-file'
+import { argv } from 'yargs'
 
 const {dts} = argv
 const DTS = resolve(dts)
 const IMPORT_MAIN_PATTERN = /\timport main = require\('(.+)'\);/g
 const IMPORT_MAIN_LINE_PATTERN = /^\timport main = require\('(.+)'\);$/
 const BROKEN_MODULE_NAME = /(declare module '.+\/lib\/es5\/)[^/]*\/src\/main\/index'.+/
-const REFERENCE = /\/\/\/.+/
+const REFERENCE = /\/{3}.+/
 
 assert(!!dts, ' `dts` file path should be specified')
 
@@ -19,7 +19,7 @@ const options = {
     IMPORT_MAIN_PATTERN,
     BROKEN_MODULE_NAME,
     REFERENCE,
-    /^\s*[\r\n]/gm
+    /^\s*[\n\r]/gm
   ],
   to: [
     '',

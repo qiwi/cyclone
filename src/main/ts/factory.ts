@@ -1,10 +1,8 @@
 import {
-  Machine,
+  DEFAULT_OPTS as DEFAULT_MACHINE_OPTS,
   IMachine,
   IMachineOpts,
-  DEFAULT_OPTS as DEFAULT_MACHINE_OPTS
-} from './machine'
-
+  Machine} from './machine'
 import {
   Registry
 } from './registry'
