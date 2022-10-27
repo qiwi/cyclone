@@ -10,17 +10,17 @@
     "lint:fix": "yarn lint -- --fix",
     "test": "yarn lint && yarn jest",
     "clean": "rm -rf target typings",
-    "build": "yarn clean && yarn build:es5 && yarn build:es6 && yarn build:ts && yarn libdef",
+    "build": "npm-run-all -p -l build:es5 build:es6 build:esnext build:ts build:libdef build:bundle docs && yarn build:esmfix",
     "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
     "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.es6.json",
+    "build:esnext": "mkdirp target/esnext && tsc -p tsconfig.esnext.json",
     "build:ts": "cp -r src/main/ target/ts/",
-    "dtsgen": "dts-generator --project ./ --out typings/index.d.ts --prefix @qiwi/cyclone/target/es5 --name @qiwi/cyclone --main @qiwi/cyclone/target/es5/index --moduleResolution node",
-    "flowgen": "flowgen typings/index.d.ts --output-file flow-typed/index.flow.js",
-    "libdef": "yarn dtsgen && yarn libdeffix && yarn flowgen",
-    "libdeffix": "node -r esm ./src/gen/js/libdef-fix.js --dts=./typings/index.d.ts",
+    "build:bundle": "microbundle --tsconfig tsconfig.es5.json build src/main/ts/index.ts -o target/bundle",
+    "build:libdef": "libdefkit --tsconfig=tsconfig.es5.json --tsconfig=tsconfig.es6.json --tsconfig=tsconfig.esnext.json",
+    "build:esmfix": "yarn tsc-esm-fix --target=target/es6 --target=target/esnext --dirnameVar=false",
     "test:report": "yarn test && yarn coveralls:push",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls",
-    "docs": "typedoc src/main --ignoreCompilerErrors || exit 0",
+    "docs": "typedoc --options ./typedoc.json ./src/main/ts",
     "postupdate": "yarn && yarn build && yarn test"
   },
   "files": [
@@ -47,43 +47,23 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.6",
-    "@semantic-release/npm": "^9.0.1",
+    "@qiwi/libdefkit": "^4.0.8",
+    "@qiwi/npm-run-all": "^4.1.7",
     "@types/jest": "^29.2.0",
     "@types/jest-json-schema": "^6.1.1",
     "coveralls": "^3.1.1",
-    "dts-generator": "^3.0.0",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-qiwi": "^1.17.8",
     "esm": "^3.2.25",
-    "flowgen": "1.20.1",
     "jest": "^29.2.2",
     "lodash": "^4.17.21",
+    "microbundle": "^0.15.1",
     "replace-in-file": "^6.3.5",
-    "semantic-release": "^19.0.5",
     "ts-jest": "29.0.3",
+    "tsc-esm-fix": "^2.20.5",
     "typedoc": "^0.23.18",
     "typescript": "^4.8.4"
-  },
-  "release": {
-    "branch": "master",
-    "verifyConditions": [
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/git"
-    ],
-    "prepare": [
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      "@semantic-release/git"
-    ],
-    "publish": [
-      "@semantic-release/npm",
-      "@semantic-release/github"
-    ]
   },
   "standard": {
     "parser": "typescript-eslint-parser",
