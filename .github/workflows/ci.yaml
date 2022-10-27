@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   build:
     name: build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
   test_push:
     needs: build
     if: github.event_name == 'push'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -74,7 +74,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        os: [ ubuntu-20.04 ]
+        os: [ ubuntu-22.04 ]
         node-version: [ 14, 18 ]
     name: Test (Node v${{ matrix.node-version }}, OS ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
@@ -92,11 +92,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn
       - name: Test only
-        if: matrix.node-version != '18' || matrix.os != 'ubuntu-20.04'
+        if: matrix.node-version != '18' || matrix.os != 'ubuntu-22.04'
         run: yarn test
 
       - name: Test & push coverage
-        if: matrix.node-version == '18' && matrix.os == 'ubuntu-20.04'
+        if: matrix.node-version == '18' && matrix.os == 'ubuntu-22.04'
         run: yarn test
 
   release:
@@ -104,7 +104,7 @@ jobs:
     # https://github.community/t/trigger-job-on-tag-push-only/18076
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: test_push
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
