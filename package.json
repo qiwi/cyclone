@@ -20,7 +20,7 @@
     "build:esmfix": "yarn tsc-esm-fix --target=target/es6 --target=target/esnext --dirnameVar=false",
     "test:report": "yarn test && yarn coveralls:push",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls",
-    "docs": "typedoc --options ./typedoc.json ./src/main/ts",
+    "docs": "typedoc src/main --ignoreCompilerErrors || exit 0",
     "postupdate": "yarn && yarn build && yarn test"
   },
   "files": [
