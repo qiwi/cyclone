@@ -8,7 +8,11 @@
     "jest": "jest --config=jest.config.json",
     "lint": "eslint src/**/*.{ts,js}",
     "lint:fix": "yarn lint -- --fix",
-    "test": "yarn lint && yarn jest",
+    "test": "yarn lint && yarn jest && yarn test:depcheck && yarn test:depaudit",
+    "test:deps": "npm-run-all -p -l test:depcheck test:depauditfix",
+    "test:depcheck": "npm_config_yes=true npx depcheck --ignores tsc-esm-fix,tslib,@types/jest, @types/jest-json-schema,typedoc,@qiwi/esm,tsm",
+    "test:depaudit": "yarn audit --level=moderate --groups=dependencies; [[ $? -ge 4 ]] && exit 1 || exit 0",
+    "test:depauditfix": "npm_config_yes=true npx yarn-audit-fix --audit-level=moderate",
     "clean": "rm -rf target typings",
     "build": "npm-run-all -p -l build:es5 build:es6 build:esnext build:ts build:libdef build:bundle docs && yarn build:esmfix",
     "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
@@ -47,6 +51,7 @@
     "tslib": "^2.4.0"
   },
   "devDependencies": {
+    "@qiwi/esm": "^1.1.8",
     "@qiwi/libdefkit": "^4.0.8",
     "@qiwi/npm-run-all": "^4.1.7",
     "@types/jest": "^29.2.0",
@@ -55,39 +60,11 @@
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-qiwi": "^1.17.8",
-    "esm": "^3.2.25",
     "jest": "^29.2.2",
-    "lodash": "^4.17.21",
     "microbundle": "^0.15.1",
-    "replace-in-file": "^6.3.5",
     "ts-jest": "29.0.3",
     "tsc-esm-fix": "^2.20.5",
     "typedoc": "^0.23.18",
     "typescript": "^4.8.4"
-  },
-  "standard": {
-    "parser": "typescript-eslint-parser",
-    "plugins": [
-      "typescript"
-    ],
-    "globals": [
-      "jest",
-      "it",
-      "expect",
-      "describe",
-      "before",
-      "beforeAll",
-      "beforeEach",
-      "afterAll",
-      "after",
-      "afterEach",
-      "xdescribe",
-      "xit"
-    ],
-    "rules": {
-      "use-flow-type": 1
-    },
-    "ignore": [],
-    "settings": {}
   }
 }
