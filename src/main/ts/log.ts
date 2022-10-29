@@ -1,4 +1,4 @@
-export const LOG_PREFIX: string = '[cyclone]'
+export const LOG_PREFIX = '[cyclone]'
 
 export const debug = console.debug.bind(console, LOG_PREFIX)
 export const info = console.info.bind(console, LOG_PREFIX)

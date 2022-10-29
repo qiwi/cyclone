@@ -1,10 +1,9 @@
 import {
-  Machine,
-  factory,
   DEFAULT_HANDLER,
+  DEFAULT_OPTS,
   DELIMITER,
-  DEFAULT_OPTS
-} from '../../main/ts'
+  factory,
+  Machine} from '../../main/ts'
 
 describe('index', () => {
   it('properly exposes default and inners', () => {
