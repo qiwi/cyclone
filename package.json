@@ -18,7 +18,7 @@
     "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
     "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.es6.json",
     "build:esnext": "mkdirp target/esnext && tsc -p tsconfig.esnext.json",
-    "build:ts": "cp -r src/main/ target/ts/",
+    "build:ts": "mkdir -p target/ts && cp -r src/main/ target/ts/",
     "build:bundle": "microbundle --tsconfig tsconfig.es5.json build src/main/ts/index.ts -o target/bundle",
     "build:libdef": "libdefkit --tsconfig=tsconfig.es5.json --tsconfig=tsconfig.es6.json --tsconfig=tsconfig.esnext.json",
     "build:esmfix": "yarn tsc-esm-fix --target=target/es6 --target=target/esnext --dirnameVar=false",
