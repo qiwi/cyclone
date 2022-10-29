@@ -1,12 +1,9 @@
 # @qiwi/cyclone
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 [![CI](https://github.com/qiwi/cyclone/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/qiwi/cyclone/actions/workflows/ci.yaml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/86263068bbb0b886ec9d/maintainability)](https://codeclimate.com/github/qiwi/cyclone/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/86263068bbb0b886ec9d/test_coverage)](https://codeclimate.com/github/qiwi/cyclone/test_coverage)
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/qiwi/cyclone)
 [![coverage](https://img.shields.io/coveralls/qiwi/cyclone.svg?maxAge=3600)](https://coveralls.io/github/qiwi/cyclone)
-[![Greenkeeper badge](https://badges.greenkeeper.io/qiwi/cyclone.svg)](https://greenkeeper.io/)
 
 "State machine" for basic purposes.
 
