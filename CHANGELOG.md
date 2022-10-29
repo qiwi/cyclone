@@ -1,3 +1,8 @@
+## [3.0.3](https://github.com/qiwi/cyclone/compare/v3.0.2...v3.0.3) (2022-10-29)
+
+### Fixes & improvements
+* perf: migrate to gh actions, update deps (#90) ([48198dd](https://github.com/qiwi/cyclone/commit/48198ddc8fa6c801b9fc695ee500589d7c67b9b6))
+
 ## [3.0.2](https://github.com/qiwi/cyclone/compare/v3.0.1...v3.0.2) (2019-08-21)
 
 
